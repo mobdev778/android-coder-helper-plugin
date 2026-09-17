@@ -1,0 +1,17 @@
+[versions]
+# libraries
+compose-multiplatform = "1.12.0" # aligned with IJP 2026.1.2
+junit = "4.13.2"
+
+# plugins
+intelliJPlatform = "2.18.1"
+kotlin = "2.3.20"
+
+[libraries]
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+
+[plugins]
+intelliJPlatform = { id = "org.jetbrains.intellij.platform", version.ref = "intelliJPlatform" }
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }

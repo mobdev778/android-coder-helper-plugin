@@ -1,0 +1,44 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>com.github.mobdev778.findinclass</id>
+    <name>Coder Helper</name>
+    <vendor>mobdev778</vendor>
+
+    <![CDATA[
+        <b>Coder Helper</b> enhances your workflow with advanced developer tools. 
+        It features deep field searching within classes, instant println() debug insertion, and automated object cloning for testing.
+    ]]>
+
+    <resource-bundle>messages.MyBundle</resource-bundle>
+
+    <dependencies>
+        <plugin id="com.intellij.modules.platform"/>
+        <plugin id="com.intellij.java"/>
+        <plugin id="org.jetbrains.kotlin"/>
+        <module name="intellij.platform.jewel.foundation"/>
+        <module name="intellij.platform.jewel.ui"/>
+        <module name="intellij.platform.jewel.ideLafBridge"/>
+        <module name="intellij.libraries.compose.runtime.desktop"/>
+        <module name="intellij.libraries.compose.foundation.desktop"/>
+        <module name="intellij.libraries.skiko"/>
+    </dependencies>
+
+    <extensions defaultExtensionNs="org.jetbrains.kotlin">
+        <supportsKotlinPluginMode supportsK2="true"/>
+    </extensions>
+
+    <actions resource-bundle="messages.MyBundle">
+        <action id="com.github.mobdev778.findinclass" class="com.github.mobdev778.plugin.findinclass.FindInClassAction">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+        <action id="com.github.mobdev778.addprintln" class="com.github.mobdev778.plugin.addprintln.AddPrintlnAction">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+        <action id="com.github.mobdev778.clonedebuggedobject" class="com.github.mobdev778.plugin.clonedebuggedobject.CloneDebuggedObjectAction">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+        <action id="com.github.mobdev778.removeprintln" class="com.github.mobdev778.plugin.removeprintln.RemovePrintlnAction">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>

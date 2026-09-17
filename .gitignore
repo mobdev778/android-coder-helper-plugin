@@ -1,0 +1,5 @@
+/.kotlin/*
+/.idea/*
+/.gradle/*
+/.intellijPlatform/*
+/build/*
