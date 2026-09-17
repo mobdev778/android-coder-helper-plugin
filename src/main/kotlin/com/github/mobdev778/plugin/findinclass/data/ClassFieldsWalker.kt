@@ -4,6 +4,10 @@ import com.github.mobdev778.plugin.findinclass.domain.FieldDescriptor
 import com.github.mobdev778.plugin.findinclass.domain.FieldType
 import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.PsiElement
+import com.intellij.psi.search.GlobalSearchScope
+import com.intellij.psi.search.searches.ClassInheritorsSearch
+import org.jetbrains.kotlin.asJava.classes.KtLightClass
+import org.jetbrains.kotlin.asJava.toLightClass
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtFunctionType
@@ -54,6 +58,17 @@ object ClassFieldsWalker {
                 visited,
                 parent
             )
+        }
+
+        val interfaceKlass = klass as? KtClass
+        if (interfaceKlass != null && interfaceKlass.isInterface()) {
+            val lightClass = interfaceKlass.toLightClass()
+            if (lightClass != null) {
+                val scope = GlobalSearchScope.allScope(interfaceKlass.project)
+                for (implementer in ClassInheritorsSearch.search(lightClass, scope, true)) {
+                    (implementer as? KtLightClass)?.kotlinOrigin?.let { walk(it, tree, visited, parent) }
+                }
+            }
         }
     }
 
